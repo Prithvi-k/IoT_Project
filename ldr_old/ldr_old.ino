@@ -22,7 +22,7 @@ int ldrbotr = 32; // bottom right LDR orange
   pinMode(ldrtopr, INPUT);
   pinMode(ldrbotl, INPUT);
   pinMode(ldrbotr, INPUT);
-  servohori.attach(18);
+  servohori.attach(27);
   servohori.write(90);
   servoverti.attach(14);
   servoverti.write(90);
@@ -59,18 +59,18 @@ void loop()
   {
     servoverti.write(servov +1);
     if (servov > servovLimitHigh) 
-    { 
+     { 
       servov = servovLimitHigh;
-    }
+     }
     delay(10);
   }
   else if (avgbot < avgtop)
   {
     servoverti.write(servov -1);
     if (servov < servovLimitLow)
-    {
-      servov = servovLimitLow;
-    }
+  {
+    servov = servovLimitLow;
+  }
     delay(10);
   }
   else 
@@ -83,18 +83,17 @@ void loop()
     servohori.write(servoh +1);
     if (servoh > servohLimitHigh)
     {
-      servoh = servohLimitHigh;
+    servoh = servohLimitHigh;
     }
     delay(10);
   }
   else if (avgright > avgleft)
   {
-    servohori.write(servoh - 1);
-    // Serial.println("Hi");
+    servohori.write(servoh -1);
     if (servoh < servohLimitLow)
-    {
-      servoh = servohLimitLow;
-    }
+     {
+     servoh = servohLimitLow;
+     }
     delay(10);
   }
   else 
