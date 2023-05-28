@@ -258,7 +258,7 @@ req_data = String() + "{\"m2m:cin\": {"
 
   + "\"con\": \"" + data + "\","
 
-  + "\"rn\": \"" + "cin_"+String(i++) + "\","
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
 
   + "\"lbl\": \"" + label + "\","
 
@@ -285,7 +285,7 @@ req_data = String() + "{\"m2m:cin\": {"
 
   + "\"con\": \"" + data + "\","
 
-  + "\"rn\": \"" + "cin_"+String(i++) + "\","
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
 
   + "\"lbl\": \"" + label + "\","
 
@@ -311,7 +311,7 @@ req_data = String() + "{\"m2m:cin\": {"
 
   + "\"con\": \"" + data + "\","
 
-  + "\"rn\": \"" + "cin_"+String(i++) + "\","
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
 
   + "\"lbl\": \"" + label + "\","
 
