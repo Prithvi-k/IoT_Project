@@ -25,6 +25,7 @@ Servo servoverti;
 int servov = 90; 
 int servovLimitHigh = 160;
 int servovLimitLow = 20;
+int time=0;
 //Assigning LDRs
 int ldrtopr = 34; // top right LDR yellow
 int ldrtopl = 35; // top left LDR green
@@ -127,8 +128,10 @@ void loop()
     servohori.write(servoh);
   }
   delay(50);
+ if(time==15){
   ThingSpeak.setField(6,servoh);
   ThingSpeak.setField(7,servov);
 ThingSpeak.writeFields(Channel_ID,Channel_API_Key);
+ }
 }
   
