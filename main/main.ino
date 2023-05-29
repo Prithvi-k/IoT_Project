@@ -3,6 +3,8 @@
 // voltage -> 4
 // servo -> 14, 18
 // ldr -> 32, 33, 34, 35
+// current 1 -> 13
+// current 2 -> TBD (27)
 
 #include <Wire.h>
 #include <SPI.h>
@@ -12,7 +14,8 @@
 
 int master_count = 0;
 Adafruit_BMP280 bmp; // use I2C interface
-int count = 0;
+int count = 0, cur1_pin = 13, cur1_count = 0, cur2_pin = 27, cur2_count = 0;
+float cur1_avg = 0.0, cur2_avg = 0.0;
 float sum_t = 0, sum_p = 0, sum_a = 0, mean_t = 0, mean_p = 0, mean_a = 0;
 const int voltage_analog_channel_pin= 4;
 int ADC_VALUE = 0;
@@ -42,6 +45,8 @@ void setup() {
   pinMode(ldrtopr, INPUT);
   pinMode(ldrbotl, INPUT);
   pinMode(ldrbotr, INPUT);
+  pinMode(cur1_pin,INPUT);
+  pinMode(cur2_pin,INPUT);
   servohori.attach(18);
   servohori.write(90);
   servoverti.attach(14);
@@ -88,8 +93,15 @@ void loop() {
     Serial.print("Voltage: ");
     Serial.println(v);
 
-    // float current=ADC_VALUE-2930;
-    // current=current*5/4905
+    
+    cur1_avg = cur1_avg / 10.0;
+    Serial.println(cur1_avg);
+    cur1_avg = 0.0;
+
+    cur2_avg = cur2_avg / 10.0;
+    Serial.println(cur2_avg);
+    cur2_avg = 0.0;
+
     master_count = 0;
   }
 
@@ -167,5 +179,13 @@ void loop() {
   Serial.println("");
   Serial.println("");
 
+  int cur1_adc=analogRead(cur1_pin);
+  float cur1_current = (cur1_adc * -0.002246) + 6.499;
+  cur1_avg += cur1_current;
+
+  int cur2_adc=analogRead(cur2_pin);
+  float cur2_current = (cur2_adc * 0.003842) - 4.491;
+  cur2_avg += cur2_current;
+  
   delay(50);
 }
