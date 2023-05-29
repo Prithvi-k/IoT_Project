@@ -3,11 +3,20 @@
 // voltage -> 32
 // current 1 -> 33
 // current 2 -> 34
+// dht - 35
 
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_BMP280.h>
 #include "Adafruit_Sensor.h"
+// #include <DHT.h>
+// #include <DHT_U.h>
+// #include "DHT.h"
+
+// #define DHTTYPE DHT11
+// #define dht_dpin 35
+
+// DHT dht(dht_dpin, DHTTYPE);
 
 int master_count = 0, debug_count = 0;
 Adafruit_BMP280 bmp; // use I2C interface
@@ -16,7 +25,7 @@ float cur1_avg = 0.0, cur2_avg = 0.0;
 float sum_t = 0, sum_p = 0, sum_a = 0, mean_t = 0, mean_p = 0, mean_a = 0;
 const int voltage_analog_pin= 32;
 int voltage_adc = 0, voltage_count = 0;
-float voltage_avg = 0.0;
+float voltage_avg = 0.0, sum_humidity = 0.0, humidity_avg = 0.0;
 
 void setup() {
   // put your setup code here, to run once:
@@ -24,7 +33,8 @@ void setup() {
   Serial.begin(9600);
   pinMode(cur1_pin,INPUT);
   pinMode(cur2_pin,INPUT);
-  delay(500);
+  // dht.begin();
+  delay(2000);
 }
 
 void loop() {
@@ -48,6 +58,11 @@ void loop() {
     Serial.print("Altitude: ");
     Serial.println(mean_a);
     sum_a = 0.0;
+
+    // humidity_avg = sum_humidity / 10.0;
+    // Serial.print("Humidity: ");
+    // Serial.println(humidity_avg);
+    // sum_humidity = 0.0;
     
     cur1_avg = cur1_avg / 10.0;
     Serial.print("Current 1: ");
@@ -55,8 +70,8 @@ void loop() {
     cur1_avg = 0.0;
 
     cur2_avg = cur2_avg / 10.0;
-    Serial.print("Current 2: ");
-    Serial.println(cur2_avg);
+    // Serial.print("Current 2: ");
+    // Serial.println(cur2_avg);
     cur2_avg = 0.0;
 
     voltage_avg /= 10;
@@ -87,6 +102,10 @@ void loop() {
 
   float altitude = bmp.readAltitude();
   sum_a = sum_a + altitude;
+
+  // float humidity = dht.readHumidity();
+  // // Serial.println(humidity);
+  // sum_humidity = sum_humidity + humidity;
 
   int cur1_adc=analogRead(cur1_pin);
   float cur1_current = (cur1_adc * -0.002246) + 6.499;

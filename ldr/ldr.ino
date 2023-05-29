@@ -10,10 +10,10 @@ int servov = 90;
 int servovLimitHigh = 160;
 int servovLimitLow = 20;
 //Assigning LDRs
-int ldrtopl = 34; //top left LDR green
-int ldrtopr = 33; //top right LDR yellow
-int ldrbotl = 35; // bottom left LDR blue
-int ldrbotr = 32; // bottom right LDR orange
+int ldrtopr = 34; // top right LDR yellow
+int ldrtopl = 35; // top left LDR green
+int ldrbotl = 32; // bottom left LDR blue
+int ldrbotr = 33; // bottom right LDR orange
 
  void setup () 
  {
@@ -22,10 +22,12 @@ int ldrbotr = 32; // bottom right LDR orange
   pinMode(ldrtopr, INPUT);
   pinMode(ldrbotl, INPUT);
   pinMode(ldrbotr, INPUT);
+  // servohori.attach(18); 18 -->36
+  // servoverti.attach(14); 14 -->39
   servohori.attach(18);
-  servohori.write(90);
   servoverti.attach(14);
-  servoverti.write(90);
+  // servohori.write(90);
+  // servoverti.write(90);
   delay(500);
  }
 
@@ -80,7 +82,7 @@ void loop()
   
   if (avgleft > avgright)
   {
-    servohori.write(servoh +1);
+    servohori.write(servoh -1);
     if (servoh > servohLimitHigh)
     {
       servoh = servohLimitHigh;
@@ -89,7 +91,7 @@ void loop()
   }
   else if (avgright > avgleft)
   {
-    servohori.write(servoh - 1);
+    servohori.write(servoh + 1);
     // Serial.println("Hi");
     if (servoh < servohLimitLow)
     {
