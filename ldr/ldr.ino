@@ -1,4 +1,20 @@
+#include <Wire.h>
+#include <SPI.h>
+#include <Adafruit_BMP280.h>
+#include "Adafruit_Sensor.h"
 #include <Servo.h>
+#include "WiFi.h"
+#include "ThingSpeak.h"
+#include <HTTPClient.h>
+
+#define Channel_ID 2163205
+#define Channel_API_Key "3NFJ999UA29ABUYQ"
+char* SSID="Redmi 9 Prime";
+char* pass="ameya3103";
+WiFiClient client;
+
+HTTPClient http;
+
 //defining Servos
 Servo servohori;
 int servoh = 90;
@@ -22,6 +38,13 @@ int ldrbotr = 33; // bottom right LDR orange
   pinMode(ldrtopr, INPUT);
   pinMode(ldrbotl, INPUT);
   pinMode(ldrbotr, INPUT);
+  WiFi.begin(SSID,pass);
+  delay(2000);
+  if(WiFi.status()==WL_CONNECTED){
+    Serial.println("WiFi connected successfully!");
+  }
+  ThingSpeak.begin(client);
+
   // servohori.attach(18); 18 -->36
   // servoverti.attach(14); 14 -->39
   servohori.attach(18);
@@ -104,4 +127,8 @@ void loop()
     servohori.write(servoh);
   }
   delay(50);
+  ThingSpeak.setField(6,servoh);
+  ThingSpeak.setField(7,servov);
+ThingSpeak.writeFields(Channel_ID,Channel_API_Key);
 }
+  
