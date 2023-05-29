@@ -17,9 +17,10 @@ Adafruit_BMP280 bmp; // use I2C interface
 int count = 0, cur1_pin = 13, cur1_count = 0, cur2_pin = 27, cur2_count = 0;
 float cur1_avg = 0.0, cur2_avg = 0.0;
 float sum_t = 0, sum_p = 0, sum_a = 0, mean_t = 0, mean_p = 0, mean_a = 0;
-const int voltage_analog_channel_pin= 4;
 int ADC_VALUE = 0;
-int voltage_value = 0;
+const int voltage_analog_pin= 14;
+int voltage_adc = 0, voltage_value = 0, voltage_count = 0;
+float voltage_avg = 0.0;
 
 //defining Servos
 Servo servohori;
@@ -101,6 +102,11 @@ void loop() {
     cur2_avg = cur2_avg / 10.0;
     Serial.println(cur2_avg);
     cur2_avg = 0.0;
+
+    voltage_avg /= 10;
+    Serial.println(voltage_avg);
+    voltage_count = 0;
+    voltage_avg = 0.0;
 
     master_count = 0;
   }
@@ -186,6 +192,16 @@ void loop() {
   int cur2_adc=analogRead(cur2_pin);
   float cur2_current = (cur2_adc * 0.003842) - 4.491;
   cur2_avg += cur2_current;
+
+  voltage_adc = analogRead(voltage_analog_pin);
+  // Serial.println(voltage_adc);
+  float v=((voltage_adc * 0.004450) + 0.06588);
+  if(v == 0.07)
+  {
+    v = 0.00;
+  }
+  voltage_avg += v;
+  voltage_count++;
   
   delay(50);
 }
