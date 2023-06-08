@@ -307,6 +307,31 @@ req_data = String() + "{\"m2m:cin\": {"
 
   + "\"con\": \"" + data + "\","
 
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
+
+  + "\"lbl\": \"" + label + "\","
+
+  + "\"cnf\": \"text\""
+
+  + "}}";
+code = http.POST(req_data);
+http.end();
+Serial.println(code);
+//-----------------------------------------------------------------------
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(v)+"]";        // change v to variable to be displayed
+
+server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+http.begin(server + String() +OM2M_AE + "/" + "Voltage-2/Data" + "/");
+
+http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+http.addHeader("Content-Type", "application/json;ty=4");
+http.addHeader("Content-Length", "100");
+label = "Voltage-2";
+
+req_data = String() + "{\"m2m:cin\": {"
+
+  + "\"con\": \"" + data + "\","
+
   + "\"rn\": \"" + "cin_"+String(i++) + "\","
 
   + "\"lbl\": \"" + label + "\","
