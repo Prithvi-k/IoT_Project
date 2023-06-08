@@ -180,9 +180,10 @@ void loop() {
   if(thingspeakcount==8){
   ThingSpeak.setField(1,temp);
   ThingSpeak.setField(2,pressure);
-  ThingSpeak.setField(3,altitude);
+  ThingSpeak.setField(3,humidity);
   ThingSpeak.setField(4,cur1_current);
   ThingSpeak.setField(5,v);
+  ThingSpeak.setField(8,voltage_2);
   ThingSpeak.writeFields(Channel_ID,Channel_API_Key);
     thingspeakcount=0;
   }
@@ -350,7 +351,7 @@ code = http.POST(req_data);
 http.end();
 Serial.println(code);
 //-----------------------------------------------------------------------
-data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(v)+"]";        // change v to variable to be displayed
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(voltage_2)+"]";        // change v to variable to be displayed
 
 server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 http.begin(server + String() +OM2M_AE + "/" + "Voltage-2/Data" + "/");
