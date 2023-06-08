@@ -164,10 +164,13 @@ void loop() {
   float cur2_current = (cur2_adc * 0.003842) - 4.491;
   cur2_avg += cur2_current;
 
+  int humidity;                                             // take humidity value
+
   voltage_adc = analogRead(voltage_analog_pin);
   // Debugging
   // Serial.println(voltage_adc);
   float v=((voltage_adc * 0.004150) + 0.7190);
+
   if(v == 0.7190)
   {
     v = 0.00;
@@ -243,6 +246,34 @@ data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(altitud
 server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 
 Serial.println(data);
+http.begin(server + String() +OM2M_AE + "/" + "Altitude/Data" + "/");
+
+http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+http.addHeader("Content-Type", "application/json;ty=4");
+http.addHeader("Content-Length", "100");
+
+label = "Altitude";
+
+req_data = String() + "{\"m2m:cin\": {"
+
+  + "\"con\": \"" + data + "\","
+
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
+
+  + "\"lbl\": \"" + label + "\","
+
+  + "\"cnf\": \"text\""
+
+  + "}}";
+code = http.POST(req_data);
+http.end();
+Serial.println(code);
+//-------------------------------------------------------------------------------------------
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(humidity)+"]";         // named variable as humidity (edit if required)
+
+server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+
+Serial.println(data);
 http.begin(server + String() +OM2M_AE + "/" + "Humidity/Data" + "/");
 
 http.addHeader("X-M2M-Origin", OM2M_ORGIN);
@@ -265,6 +296,7 @@ req_data = String() + "{\"m2m:cin\": {"
 code = http.POST(req_data);
 http.end();
 Serial.println(code);
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(cur1_current)+"]";
 
 server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
