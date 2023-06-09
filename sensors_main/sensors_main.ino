@@ -1,8 +1,11 @@
 // PINS USED
+// 5V input from ESP
 // bmp -> 22(SCL), 21(SDA)
 // voltage -> 32
 // current 1 -> 33
-// current 2 -> 34
+// current 2 -> 34 (unused)
+// dht -> 13
+// voltage_2 -> 34
 
 #include <Wire.h>
 #include <SPI.h>
@@ -12,16 +15,22 @@
 #include "WiFi.h"
 #include "ThingSpeak.h"
 #include <HTTPClient.h>
+#include <DHT.h>
+#include <DHT_U.h>
+#include "DHT.h"
 
 int master_count = 0, debug_count = 0;
 Adafruit_BMP280 bmp; // use I2C interface
-int cur1_pin = 33, cur2_pin = 34;
+int cur1_pin = 33, cur2_pin = 71, dht_dpin = 13;
 float cur1_avg = 0.0, cur2_avg = 0.0;
 float sum_t = 0, sum_p = 0, sum_a = 0, mean_t = 0, mean_p = 0, mean_a = 0;
-const int voltage_analog_pin= 32;
+const int voltage_analog_pin= 32, voltage_2_analog_pin = 34;
 int voltage_adc = 0, voltage_count = 0;
 float voltage_avg = 0.0;
 int thingspeakcount=0;
+float humidity = 0.0, humidity_avg = 0.0;
+int voltage_2_adc = 0, voltage_2_count = 0;
+float voltage_2_avg = 0.0;
 HTTPClient http;
 const char* ntpServer = "pool.ntp.org";
 unsigned long epochTime; 
@@ -38,8 +47,8 @@ unsigned long getTime() {
 }
 #define Channel_ID 2163205
 #define Channel_API_Key "3NFJ999UA29ABUYQ"
-char* SSID="Redmi 9 Prime";
-char* pass="ameya3103";
+char* SSID="iPhone";
+char* pass="ortisht123";
 WiFiClient client;
 #define CSE_IP      "192.168.43.184"
 #define CSE_PORT    5089
@@ -48,6 +57,10 @@ WiFiClient client;
 #define OM2M_MN     "/~/in-cse/in-name/"
 #define OM2M_AE     "SOLAR-OPTIMISATION"
 #define OM2M_DATA_CONT  "Node-1/Data"
+#define DHTTYPE DHT11
+
+DHT dht(dht_dpin, DHTTYPE);
+
 Servo servohori;
 int servoh = 90;
 int servohLimitHigh = 160;
@@ -67,11 +80,12 @@ void setup() {
   // bmp.begin(0x76);
   // Serial.begin(9600);
   pinMode(cur1_pin,INPUT);
-  pinMode(cur2_pin,INPUT);
+  // pinMode(cur2_pin,INPUT);
   // delay(500);
+  dht.begin();
   configTime(0, 0, ntpServer);
   bmp.begin(0x76);
- Serial.begin(9600);
+  Serial.begin(9600);
   Serial.println("Connecting to WiFi...");
   WiFi.begin(SSID,pass);
   delay(2000);
@@ -81,14 +95,6 @@ void setup() {
   Serial.println("Local IP: ");
   Serial.print(WiFi.localIP());
   ThingSpeak.begin(client);
-  pinMode(ldrtopl, INPUT);
-  pinMode(ldrtopr, INPUT);
-  pinMode(ldrbotl, INPUT);
-  pinMode(ldrbotr, INPUT);
-  servohori.attach(18);
-  servohori.write(90);
-  servoverti.attach(14);
-  servoverti.write(90);
   delay(500);
 }
 
@@ -98,6 +104,7 @@ void loop() {
   // debug_count++;
   thingspeakcount++;
   int occupancy=0;
+  Serial.println("bhaisaab");
   if(master_count == 10)
   {
     mean_t = sum_t / 10.0;
@@ -121,15 +128,27 @@ void loop() {
     cur1_avg = 0.0;
 
     cur2_avg = cur2_avg / 10.0;
-    Serial.print("Current 2: ");
-    Serial.println(cur2_avg);
+    // Serial.print("Current 2: ");
+    // Serial.println(cur2_avg);
     cur2_avg = 0.0;
+
+    humidity_avg = humidity_avg / 10.0;
+    Serial.print("Humidity: ");
+    Serial.print(humidity_avg);
+    Serial.println("%");
+    humidity_avg = 0.0;
 
     voltage_avg /= 10;
     Serial.print("Voltage: ");
     Serial.println(voltage_avg);
     voltage_count = 0;
     voltage_avg = 0.0;
+
+    voltage_2_avg /= 10;
+    Serial.print("Voltage 2: ");
+    Serial.println(voltage_2_avg);
+    voltage_2_count = 0;
+    voltage_2_avg = 0.0;
 
     master_count = 0;
     Serial.println("");
@@ -154,8 +173,16 @@ void loop() {
   float altitude = bmp.readAltitude();
   sum_a = sum_a + altitude;
 
+  float humidity_reading = dht.readHumidity();
+  humidity = humidity_reading;
+  if(isnan(humidity_reading))
+  {
+    humidity = 0.0;
+  }
+  humidity_avg = humidity_avg + humidity;
+
   int cur1_adc=analogRead(cur1_pin);
-  float cur1_current = (cur1_adc * -0.002246) + 6.499;
+  float cur1_current = (cur1_adc * 0.0002566) - 0.9261;             // Updated 9/6/2023
   cur1_avg += cur1_current;
 
   int cur2_adc=analogRead(cur2_pin);
@@ -164,23 +191,38 @@ void loop() {
   float cur2_current = (cur2_adc * 0.003842) - 4.491;
   cur2_avg += cur2_current;
 
-  int humidity;                                             // take humidity value
-
   voltage_adc = analogRead(voltage_analog_pin);
   // Debugging
   // Serial.println(voltage_adc);
-  float v=((voltage_adc * 0.004150) + 0.7190);
-
-  if(v == 0.7190)
+  float v=((voltage_adc * 0.004574) +  0.08769);
+  if(v < 0.8)
   {
     v = 0.00;
   }
   voltage_avg += v;
   voltage_count++;
+
+  float voltage_2_adc_reading = analogRead(voltage_2_analog_pin);
+  if(!isnan(voltage_2_adc_reading))
+  {
+    voltage_2_adc = voltage_2_adc_reading;
+  }
+  // Debugging
+  // Serial.println(voltage_adc);
+  float voltage_2=((voltage_adc * 0.004574) +  0.08769);
+
+  if(voltage_2 < 0.8)
+  {
+    voltage_2 = 0.00;
+  }
+  voltage_2_avg += voltage_2;
+  voltage_2_count++;
+
+
   if(thingspeakcount==8){
   ThingSpeak.setField(1,temp);
   ThingSpeak.setField(2,pressure);
-  ThingSpeak.setField(3,humidity);
+  ThingSpeak.setField(3,altitude);
   ThingSpeak.setField(4,cur1_current);
   ThingSpeak.setField(5,v);
   ThingSpeak.setField(8,voltage_2);
@@ -193,7 +235,7 @@ void loop() {
 
 String server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 
-Serial.println(data);
+// // Serial.println(data);
 http.begin(server + String() +OM2M_AE + "/" + "Temp/Data" + "/");
 
 http.addHeader("X-M2M-Origin", OM2M_ORGIN);
@@ -215,12 +257,12 @@ String req_data = String() + "{\"m2m:cin\": {"
   + "}}";
 int code = http.POST(req_data);
 http.end();
-Serial.println(code);
+// Serial.println(code);
 data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(pressure)+"]";
 
 server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 
-Serial.println(data);
+// // Serial.println(data);
 http.begin(server + String() +OM2M_AE + "/" + "Pressure/Data" + "/");
 
 http.addHeader("X-M2M-Origin", OM2M_ORGIN);
@@ -241,40 +283,12 @@ req_data = String() + "{\"m2m:cin\": {"
   + "}}";
 code = http.POST(req_data);
 http.end();
-Serial.println(code);
+// Serial.println(code);
 data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(altitude)+"]";
 
 server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 
-Serial.println(data);
-http.begin(server + String() +OM2M_AE + "/" + "Altitude/Data" + "/");
-
-http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-http.addHeader("Content-Type", "application/json;ty=4");
-http.addHeader("Content-Length", "100");
-
-label = "Altitude";
-
-req_data = String() + "{\"m2m:cin\": {"
-
-  + "\"con\": \"" + data + "\","
-
-  + "\"rn\": \"" + "cin_"+String(i) + "\","
-
-  + "\"lbl\": \"" + label + "\","
-
-  + "\"cnf\": \"text\""
-
-  + "}}";
-code = http.POST(req_data);
-http.end();
-Serial.println(code);
-//-------------------------------------------------------------------------------------------
-data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(humidity)+"]";         // named variable as humidity (edit if required)
-
-server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-
-Serial.println(data);
+// Serial.println(data);
 http.begin(server + String() +OM2M_AE + "/" + "Humidity/Data" + "/");
 
 http.addHeader("X-M2M-Origin", OM2M_ORGIN);
@@ -296,13 +310,12 @@ req_data = String() + "{\"m2m:cin\": {"
   + "}}";
 code = http.POST(req_data);
 http.end();
-Serial.println(code);
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Serial.println(code);
 data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(cur1_current)+"]";
 
 server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 
-Serial.println(data);
+// Serial.println(data);
 http.begin(server + String() +OM2M_AE + "/" + "Current-1/Data" + "/");
 
 http.addHeader("X-M2M-Origin", OM2M_ORGIN);
@@ -323,12 +336,12 @@ req_data = String() + "{\"m2m:cin\": {"
   + "}}";
 code = http.POST(req_data);
 http.end();
-Serial.println(code);
+// Serial.println(code);
 data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(v)+"]";
 
 server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 
-Serial.println(data);
+// Serial.println(data);
 http.begin(server + String() +OM2M_AE + "/" + "Voltage-1/Data" + "/");
 
 http.addHeader("X-M2M-Origin", OM2M_ORGIN);
@@ -340,7 +353,7 @@ req_data = String() + "{\"m2m:cin\": {"
 
   + "\"con\": \"" + data + "\","
 
-  + "\"rn\": \"" + "cin_"+String(i) + "\","
+  + "\"rn\": \"" + "cin_"+String(i++) + "\","
 
   + "\"lbl\": \"" + label + "\","
 
@@ -348,10 +361,8 @@ req_data = String() + "{\"m2m:cin\": {"
 
   + "}}";
 code = http.POST(req_data);
-http.end();
-Serial.println(code);
-//-----------------------------------------------------------------------
-data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(voltage_2)+"]";        // change v to variable to be displayed
+
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(voltage_2)+"]";
 
 server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 http.begin(server + String() +OM2M_AE + "/" + "Voltage-2/Data" + "/");
