@@ -106,7 +106,7 @@ void loop()
   
   if (avgleft > avgright)
   {
-    servohori.write(servoh -1);
+    servohori.write(servoh + 1);
     if (servoh > servohLimitHigh)
     {
       servoh = servohLimitHigh;
@@ -115,7 +115,7 @@ void loop()
   }
   else if (avgright > avgleft)
   {
-    servohori.write(servoh + 1);
+    servohori.write(servoh - 1);
     // Serial.println("Hi");
     if (servoh < servohLimitLow)
     {

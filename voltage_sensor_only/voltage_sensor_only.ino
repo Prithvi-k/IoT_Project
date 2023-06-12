@@ -1,4 +1,4 @@
-const int voltage_analog_pin= 14;
+const int voltage_analog_pin= 34;
 int voltage_adc = 0, voltage_value = 0, voltage_count = 0;
 float voltage_avg = 0.0;
 void setup() 

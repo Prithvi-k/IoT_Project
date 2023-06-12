@@ -47,8 +47,8 @@ unsigned long getTime() {
 }
 #define Channel_ID 2163205
 #define Channel_API_Key "3NFJ999UA29ABUYQ"
-char* SSID="iPhone";
-char* pass="ortisht123";
+char* SSID="Galaxy S20 FE 5G C177";
+char* pass="b1d9s4k7";
 WiFiClient client;
 #define CSE_IP      "192.168.43.184"
 #define CSE_PORT    5089
@@ -192,6 +192,7 @@ void loop() {
   cur2_avg += cur2_current;
 
   voltage_adc = analogRead(voltage_analog_pin);
+  Serial.println(voltage_adc);
   // Debugging
   // Serial.println(voltage_adc);
   float v=((voltage_adc * 0.004574) +  0.08769);
@@ -203,6 +204,7 @@ void loop() {
   voltage_count++;
 
   float voltage_2_adc_reading = analogRead(voltage_2_analog_pin);
+  Serial.println(voltage_2_adc_reading);
   if(!isnan(voltage_2_adc_reading))
   {
     voltage_2_adc = voltage_2_adc_reading;
@@ -225,166 +227,166 @@ void loop() {
   ThingSpeak.setField(3,altitude);
   ThingSpeak.setField(4,cur1_current);
   ThingSpeak.setField(5,v);
-  ThingSpeak.setField(8,voltage_2);
+  // ThingSpeak.setField(8,voltage_2);
   ThingSpeak.writeFields(Channel_ID,Channel_API_Key);
     thingspeakcount=0;
   }
 
-  static int i=0;
-  String data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(temp)+"]";
+//   static int i=0;
+//   String data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(temp)+"]";
 
-String server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+// String server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+
+// // // Serial.println(data);
+// http.begin(server + String() +OM2M_AE + "/" + "Temp/Data" + "/");
+
+// http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+// http.addHeader("Content-Type", "application/json;ty=4");
+// http.addHeader("Content-Length", "100");
+
+// String label = "Temp";
+
+// String req_data = String() + "{\"m2m:cin\": {"
+
+//   + "\"con\": \"" + data + "\","
+
+//   + "\"rn\": \"" + "cin_"+String(i) + "\","
+
+//   + "\"lbl\": \"" + label + "\","
+
+//   + "\"cnf\": \"text\""
+
+//   + "}}";
+// int code = http.POST(req_data);
+// http.end();
+// // Serial.println(code);
+// data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(pressure)+"]";
+
+// server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+
+// // // Serial.println(data);
+// http.begin(server + String() +OM2M_AE + "/" + "Pressure/Data" + "/");
+
+// http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+// http.addHeader("Content-Type", "application/json;ty=4");
+// http.addHeader("Content-Length", "100");
+
+// label = "Pressure";
+// req_data = String() + "{\"m2m:cin\": {"
+
+//   + "\"con\": \"" + data + "\","
+
+//   + "\"rn\": \"" + "cin_"+String(i) + "\","
+
+//   + "\"lbl\": \"" + label + "\","
+
+//   + "\"cnf\": \"text\""
+
+//   + "}}";
+// code = http.POST(req_data);
+// http.end();
+// // Serial.println(code);
+// data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(altitude)+"]";
+
+// server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 
 // // Serial.println(data);
-http.begin(server + String() +OM2M_AE + "/" + "Temp/Data" + "/");
+// // http.begin(server + String() +OM2M_AE + "/" + "Humidity/Data" + "/");
 
-http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-http.addHeader("Content-Type", "application/json;ty=4");
-http.addHeader("Content-Length", "100");
+// // http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+// // http.addHeader("Content-Type", "application/json;ty=4");
+// // http.addHeader("Content-Length", "100");
 
-String label = "Temp";
+// // label = "Humidity";
 
-String req_data = String() + "{\"m2m:cin\": {"
+// // req_data = String() + "{\"m2m:cin\": {"
 
-  + "\"con\": \"" + data + "\","
+// //   + "\"con\": \"" + data + "\","
 
-  + "\"rn\": \"" + "cin_"+String(i) + "\","
+// //   + "\"rn\": \"" + "cin_"+String(i) + "\","
 
-  + "\"lbl\": \"" + label + "\","
+// //   + "\"lbl\": \"" + label + "\","
 
-  + "\"cnf\": \"text\""
+// //   + "\"cnf\": \"text\""
 
-  + "}}";
-int code = http.POST(req_data);
-http.end();
-// Serial.println(code);
-data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(pressure)+"]";
+// //   + "}}";
+// // code = http.POST(req_data);
+// // http.end();
+// // Serial.println(code);
+// data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(cur1_current)+"]";
 
-server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+// server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 
 // // Serial.println(data);
-http.begin(server + String() +OM2M_AE + "/" + "Pressure/Data" + "/");
+// http.begin(server + String() +OM2M_AE + "/" + "Current-1/Data" + "/");
 
-http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-http.addHeader("Content-Type", "application/json;ty=4");
-http.addHeader("Content-Length", "100");
+// http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+// http.addHeader("Content-Type", "application/json;ty=4");
+// http.addHeader("Content-Length", "100");
 
-label = "Pressure";
-req_data = String() + "{\"m2m:cin\": {"
+// label = "Current-1";
+// req_data = String() + "{\"m2m:cin\": {"
 
-  + "\"con\": \"" + data + "\","
+//   + "\"con\": \"" + data + "\","
 
-  + "\"rn\": \"" + "cin_"+String(i) + "\","
+//   + "\"rn\": \"" + "cin_"+String(i) + "\","
 
-  + "\"lbl\": \"" + label + "\","
+//   + "\"lbl\": \"" + label + "\","
 
-  + "\"cnf\": \"text\""
+//   + "\"cnf\": \"text\""
 
-  + "}}";
-code = http.POST(req_data);
-http.end();
+//   + "}}";
+// code = http.POST(req_data);
+// http.end();
+// // Serial.println(code);
+// data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(v)+"]";
+
+// server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+
+// // Serial.println(data);
+// http.begin(server + String() +OM2M_AE + "/" + "Voltage-1/Data" + "/");
+
+// http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+// http.addHeader("Content-Type", "application/json;ty=4");
+// http.addHeader("Content-Length", "100");
+// label = "Voltage-1";
+
+// req_data = String() + "{\"m2m:cin\": {"
+
+//   + "\"con\": \"" + data + "\","
+
+//   + "\"rn\": \"" + "cin_"+String(i++) + "\","
+
+//   + "\"lbl\": \"" + label + "\","
+
+//   + "\"cnf\": \"text\""
+
+//   + "}}";
+// code = http.POST(req_data);
+
+// // data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(voltage_2)+"]";
+
+// // server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+// // http.begin(server + String() +OM2M_AE + "/" + "Voltage-2/Data" + "/");
+
+// // http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+// // http.addHeader("Content-Type", "application/json;ty=4");
+// // http.addHeader("Content-Length", "100");
+// // label = "Voltage-2";
+
+// // req_data = String() + "{\"m2m:cin\": {"
+
+// //   + "\"con\": \"" + data + "\","
+
+// //   + "\"rn\": \"" + "cin_"+String(i++) + "\","
+
+// //   + "\"lbl\": \"" + label + "\","
+
+// //   + "\"cnf\": \"text\""
+
+// //   + "}}";
+// // code = http.POST(req_data);
+// http.end();
 // Serial.println(code);
-data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(altitude)+"]";
-
-server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-
-// Serial.println(data);
-http.begin(server + String() +OM2M_AE + "/" + "Humidity/Data" + "/");
-
-http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-http.addHeader("Content-Type", "application/json;ty=4");
-http.addHeader("Content-Length", "100");
-
-label = "Humidity";
-
-req_data = String() + "{\"m2m:cin\": {"
-
-  + "\"con\": \"" + data + "\","
-
-  + "\"rn\": \"" + "cin_"+String(i) + "\","
-
-  + "\"lbl\": \"" + label + "\","
-
-  + "\"cnf\": \"text\""
-
-  + "}}";
-code = http.POST(req_data);
-http.end();
-// Serial.println(code);
-data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(cur1_current)+"]";
-
-server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-
-// Serial.println(data);
-http.begin(server + String() +OM2M_AE + "/" + "Current-1/Data" + "/");
-
-http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-http.addHeader("Content-Type", "application/json;ty=4");
-http.addHeader("Content-Length", "100");
-
-label = "Current-1";
-req_data = String() + "{\"m2m:cin\": {"
-
-  + "\"con\": \"" + data + "\","
-
-  + "\"rn\": \"" + "cin_"+String(i) + "\","
-
-  + "\"lbl\": \"" + label + "\","
-
-  + "\"cnf\": \"text\""
-
-  + "}}";
-code = http.POST(req_data);
-http.end();
-// Serial.println(code);
-data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(v)+"]";
-
-server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-
-// Serial.println(data);
-http.begin(server + String() +OM2M_AE + "/" + "Voltage-1/Data" + "/");
-
-http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-http.addHeader("Content-Type", "application/json;ty=4");
-http.addHeader("Content-Length", "100");
-label = "Voltage-1";
-
-req_data = String() + "{\"m2m:cin\": {"
-
-  + "\"con\": \"" + data + "\","
-
-  + "\"rn\": \"" + "cin_"+String(i++) + "\","
-
-  + "\"lbl\": \"" + label + "\","
-
-  + "\"cnf\": \"text\""
-
-  + "}}";
-code = http.POST(req_data);
-
-data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(voltage_2)+"]";
-
-server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-http.begin(server + String() +OM2M_AE + "/" + "Voltage-2/Data" + "/");
-
-http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-http.addHeader("Content-Type", "application/json;ty=4");
-http.addHeader("Content-Length", "100");
-label = "Voltage-2";
-
-req_data = String() + "{\"m2m:cin\": {"
-
-  + "\"con\": \"" + data + "\","
-
-  + "\"rn\": \"" + "cin_"+String(i++) + "\","
-
-  + "\"lbl\": \"" + label + "\","
-
-  + "\"cnf\": \"text\""
-
-  + "}}";
-code = http.POST(req_data);
-http.end();
-Serial.println(code);
-  delay(50);
+//   delay(50);
 }
