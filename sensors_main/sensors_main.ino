@@ -47,10 +47,10 @@ unsigned long getTime() {
 }
 #define Channel_ID 2163205
 #define Channel_API_Key "3NFJ999UA29ABUYQ"
-char* SSID="Galaxy S20 FE 5G C177";
-char* pass="b1d9s4k7";
+char* SSID="Galaxy M53 5GC4C1";
+char* pass="kkqu3690";
 WiFiClient client;
-#define CSE_IP      "192.168.43.184"
+#define CSE_IP      "192.168.197.184"
 #define CSE_PORT    5089
 #define HTTPS     false
 #define OM2M_ORGIN    "admin:admin"
@@ -232,161 +232,191 @@ void loop() {
     thingspeakcount=0;
   }
 
-//   static int i=0;
-//   String data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(temp)+"]";
+  static int i=0;
+  String data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(temp)+"]";
 
-// String server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-
-// // // Serial.println(data);
-// http.begin(server + String() +OM2M_AE + "/" + "Temp/Data" + "/");
-
-// http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-// http.addHeader("Content-Type", "application/json;ty=4");
-// http.addHeader("Content-Length", "100");
-
-// String label = "Temp";
-
-// String req_data = String() + "{\"m2m:cin\": {"
-
-//   + "\"con\": \"" + data + "\","
-
-//   + "\"rn\": \"" + "cin_"+String(i) + "\","
-
-//   + "\"lbl\": \"" + label + "\","
-
-//   + "\"cnf\": \"text\""
-
-//   + "}}";
-// int code = http.POST(req_data);
-// http.end();
-// // Serial.println(code);
-// data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(pressure)+"]";
-
-// server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-
-// // // Serial.println(data);
-// http.begin(server + String() +OM2M_AE + "/" + "Pressure/Data" + "/");
-
-// http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-// http.addHeader("Content-Type", "application/json;ty=4");
-// http.addHeader("Content-Length", "100");
-
-// label = "Pressure";
-// req_data = String() + "{\"m2m:cin\": {"
-
-//   + "\"con\": \"" + data + "\","
-
-//   + "\"rn\": \"" + "cin_"+String(i) + "\","
-
-//   + "\"lbl\": \"" + label + "\","
-
-//   + "\"cnf\": \"text\""
-
-//   + "}}";
-// code = http.POST(req_data);
-// http.end();
-// // Serial.println(code);
-// data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(altitude)+"]";
-
-// server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+String server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
 
 // // Serial.println(data);
-// // http.begin(server + String() +OM2M_AE + "/" + "Humidity/Data" + "/");
+http.begin(server + String() +OM2M_AE + "/" + "Temp/Data" + "/");
 
-// // http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-// // http.addHeader("Content-Type", "application/json;ty=4");
-// // http.addHeader("Content-Length", "100");
+http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+http.addHeader("Content-Type", "application/json;ty=4");
+http.addHeader("Content-Length", "100");
 
-// // label = "Humidity";
+String label = "Temp";
 
-// // req_data = String() + "{\"m2m:cin\": {"
+String req_data = String() + "{\"m2m:cin\": {"
 
-// //   + "\"con\": \"" + data + "\","
+  + "\"con\": \"" + data + "\","
 
-// //   + "\"rn\": \"" + "cin_"+String(i) + "\","
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
 
-// //   + "\"lbl\": \"" + label + "\","
+  + "\"lbl\": \"" + label + "\","
 
-// //   + "\"cnf\": \"text\""
+  + "\"cnf\": \"text\""
 
-// //   + "}}";
-// // code = http.POST(req_data);
-// // http.end();
-// // Serial.println(code);
-// data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(cur1_current)+"]";
-
-// server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-
-// // Serial.println(data);
-// http.begin(server + String() +OM2M_AE + "/" + "Current-1/Data" + "/");
-
-// http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-// http.addHeader("Content-Type", "application/json;ty=4");
-// http.addHeader("Content-Length", "100");
-
-// label = "Current-1";
-// req_data = String() + "{\"m2m:cin\": {"
-
-//   + "\"con\": \"" + data + "\","
-
-//   + "\"rn\": \"" + "cin_"+String(i) + "\","
-
-//   + "\"lbl\": \"" + label + "\","
-
-//   + "\"cnf\": \"text\""
-
-//   + "}}";
-// code = http.POST(req_data);
-// http.end();
-// // Serial.println(code);
-// data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(v)+"]";
-
-// server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-
-// // Serial.println(data);
-// http.begin(server + String() +OM2M_AE + "/" + "Voltage-1/Data" + "/");
-
-// http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-// http.addHeader("Content-Type", "application/json;ty=4");
-// http.addHeader("Content-Length", "100");
-// label = "Voltage-1";
-
-// req_data = String() + "{\"m2m:cin\": {"
-
-//   + "\"con\": \"" + data + "\","
-
-//   + "\"rn\": \"" + "cin_"+String(i++) + "\","
-
-//   + "\"lbl\": \"" + label + "\","
-
-//   + "\"cnf\": \"text\""
-
-//   + "}}";
-// code = http.POST(req_data);
-
-// // data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(voltage_2)+"]";
-
-// // server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
-// // http.begin(server + String() +OM2M_AE + "/" + "Voltage-2/Data" + "/");
-
-// // http.addHeader("X-M2M-Origin", OM2M_ORGIN);
-// // http.addHeader("Content-Type", "application/json;ty=4");
-// // http.addHeader("Content-Length", "100");
-// // label = "Voltage-2";
-
-// // req_data = String() + "{\"m2m:cin\": {"
-
-// //   + "\"con\": \"" + data + "\","
-
-// //   + "\"rn\": \"" + "cin_"+String(i++) + "\","
-
-// //   + "\"lbl\": \"" + label + "\","
-
-// //   + "\"cnf\": \"text\""
-
-// //   + "}}";
-// // code = http.POST(req_data);
-// http.end();
+  + "}}";
+int code = http.POST(req_data);
+http.end();
+//-------------------------------------------------------------------------------------------
 // Serial.println(code);
-//   delay(50);
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(humidity)+"]";
+
+server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+
+// // Serial.println(data);
+http.begin(server + String() +OM2M_AE + "/" + "Humidity/Data" + "/");
+
+http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+http.addHeader("Content-Type", "application/json;ty=4");
+http.addHeader("Content-Length", "100");
+
+label = "Humidity";
+req_data = String() + "{\"m2m:cin\": {"
+
+  + "\"con\": \"" + data + "\","
+
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
+
+  + "\"lbl\": \"" + label + "\","
+
+  + "\"cnf\": \"text\""
+
+  + "}}";
+code = http.POST(req_data);
+http.end();
+//-------------------------------------------------------------------------------
+// Serial.println(code);
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(pressure)+"]";
+
+server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+
+// // Serial.println(data);
+http.begin(server + String() +OM2M_AE + "/" + "Pressure/Data" + "/");
+
+http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+http.addHeader("Content-Type", "application/json;ty=4");
+http.addHeader("Content-Length", "100");
+
+label = "Pressure";
+req_data = String() + "{\"m2m:cin\": {"
+
+  + "\"con\": \"" + data + "\","
+
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
+
+  + "\"lbl\": \"" + label + "\","
+
+  + "\"cnf\": \"text\""
+
+  + "}}";
+code = http.POST(req_data);
+http.end();
+// Serial.println(code);
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(altitude)+"]";
+
+server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+
+// Serial.println(data);
+http.begin(server + String() +OM2M_AE + "/" + "Altitude/Data" + "/");
+
+http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+http.addHeader("Content-Type", "application/json;ty=4");
+http.addHeader("Content-Length", "100");
+
+label = "Altitude";
+
+req_data = String() + "{\"m2m:cin\": {"
+
+  + "\"con\": \"" + data + "\","
+
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
+
+  + "\"lbl\": \"" + label + "\","
+
+  + "\"cnf\": \"text\""
+
+  + "}}";
+code = http.POST(req_data);
+http.end();
+Serial.println(code);
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(cur1_current)+"]";
+
+server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+
+// Serial.println(data);
+http.begin(server + String() +OM2M_AE + "/" + "Current-1/Data" + "/");
+
+http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+http.addHeader("Content-Type", "application/json;ty=4");
+http.addHeader("Content-Length", "100");
+
+label = "Current-1";
+req_data = String() + "{\"m2m:cin\": {"
+
+  + "\"con\": \"" + data + "\","
+
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
+
+  + "\"lbl\": \"" + label + "\","
+
+  + "\"cnf\": \"text\""
+
+  + "}}";
+code = http.POST(req_data);
+http.end();
+//--------------------------------------------------------------------------------------
+
+// Serial.println(code);
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(v)+"]";
+
+server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+
+// Serial.println(data);
+http.begin(server + String() +OM2M_AE + "/" + "Voltage-1/Data" + "/");
+
+http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+http.addHeader("Content-Type", "application/json;ty=4");
+http.addHeader("Content-Length", "100");
+label = "Voltage-1";
+
+req_data = String() + "{\"m2m:cin\": {"
+
+  + "\"con\": \"" + data + "\","
+
+  + "\"rn\": \"" + "cin_"+String(i) + "\","
+
+  + "\"lbl\": \"" + label + "\","
+
+  + "\"cnf\": \"text\""
+
+  + "}}";
+code = http.POST(req_data);
+
+data="[" + String(epochTime) + ", " + String(occupancy) + " , " + String(voltage_2)+"]";
+
+server="http://" + String() + CSE_IP + ":" + String() + CSE_PORT + String()+OM2M_MN;
+http.begin(server + String() +OM2M_AE + "/" + "Voltage-2/Data" + "/");
+
+http.addHeader("X-M2M-Origin", OM2M_ORGIN);
+http.addHeader("Content-Type", "application/json;ty=4");
+http.addHeader("Content-Length", "100");
+label = "Voltage-2";
+
+req_data = String() + "{\"m2m:cin\": {"
+
+  + "\"con\": \"" + data + "\","
+
+  + "\"rn\": \"" + "cin_"+String(i++) + "\","
+
+  + "\"lbl\": \"" + label + "\","
+
+  + "\"cnf\": \"text\""
+
+  + "}}";
+code = http.POST(req_data);
+http.end();
+Serial.println(code);
+  delay(50);
 }
