@@ -95,7 +95,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Temp\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Temp\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
@@ -135,7 +135,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Pressure\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Pressure\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
@@ -175,7 +175,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Humidity\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Humidity\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
@@ -216,7 +216,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Altitude\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Altitude\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
@@ -256,7 +256,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Current-1\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Current-1\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
@@ -296,7 +296,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Current-2\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Current-2\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
@@ -336,7 +336,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Voltage-1\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Voltage-1\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
@@ -376,7 +376,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Voltage-2\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Voltage-2\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
@@ -417,7 +417,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Temp/",
@@ -459,7 +459,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Pressure/",
@@ -501,7 +501,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Humidity/",
@@ -544,7 +544,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Altitude/",
@@ -586,7 +586,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-1/",
@@ -628,7 +628,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-2/",
@@ -670,7 +670,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-1/",
@@ -712,7 +712,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 120\n\n    }\n}"
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-2/",

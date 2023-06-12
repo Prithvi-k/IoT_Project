@@ -147,7 +147,7 @@ for i in range(len(dataCon)):
 
     print(stri)
 
-    with open('data_2220_12-06-23.csv', 'a') as file:
+    with open('data.csv', 'a') as file:
         file.write(stri)
     
 
