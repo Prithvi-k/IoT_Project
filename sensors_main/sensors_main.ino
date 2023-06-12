@@ -173,10 +173,9 @@ void loop() {
   sum_a = sum_a + altitude;
 
   float humidity_reading = dht.readHumidity();
-  humidity = humidity_reading;
-  if(isnan(humidity_reading))
+  if(!isnan(humidity_reading))
   {
-    humidity = 0.0;
+    humidity = humidity_reading;
   }
   humidity_avg = humidity_avg + humidity;
 
