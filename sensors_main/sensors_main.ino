@@ -211,7 +211,7 @@ void loop() {
   }
   // Debugging
   // Serial.println(voltage_adc);
-  float voltage_2=((voltage_adc * 0.004574) +  0.08769);
+  float voltage_2=((voltage_2_adc * 0.004574) +  0.08769);
 
   if(voltage_2 < 0.8)
   {
