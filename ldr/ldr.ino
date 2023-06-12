@@ -9,8 +9,8 @@
 
 #define Channel_ID 2163205
 #define Channel_API_Key "3NFJ999UA29ABUYQ"
-char* SSID="Redmi 9 Prime";
-char* pass="ameya3103";
+char* SSID="Galaxy M53 5GC4C1";
+char* pass="kkqu3690";
 WiFiClient client;
 
 HTTPClient http;
@@ -25,7 +25,7 @@ Servo servoverti;
 int servov = 90; 
 int servovLimitHigh = 160;
 int servovLimitLow = 20;
-int time=0;
+int time_var=0;
 //Assigning LDRs
 int ldrtopr = 34; // top right LDR yellow
 int ldrtopl = 35; // top left LDR green
@@ -46,10 +46,10 @@ int ldrbotr = 33; // bottom right LDR orange
   }
   ThingSpeak.begin(client);
 
-  // servohori.attach(18); 18 -->36
-  // servoverti.attach(14); 14 -->39
   servohori.attach(18);
   servoverti.attach(14);
+  // servohori.attach(18); 18 -->36
+  // servoverti.attach(14); 14 -->39
   // servohori.write(90);
   // servoverti.write(90);
   delay(500);
@@ -127,11 +127,13 @@ void loop()
   {
     servohori.write(servoh);
   }
+  time_var++;
   delay(50);
- if(time==15){
+ if(time_var==15){
   ThingSpeak.setField(6,servoh);
   ThingSpeak.setField(7,servov);
-ThingSpeak.writeFields(Channel_ID,Channel_API_Key);
+  ThingSpeak.writeFields(Channel_ID,Channel_API_Key);
+  time_var = 0;
  }
 }
   

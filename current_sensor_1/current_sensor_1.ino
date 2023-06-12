@@ -1,4 +1,4 @@
-int pin = 13, cur1_count = 0;
+int pin = 14, cur1_count = 0;
 float cur1_avg = 0.0;
   
 void setup() {
@@ -10,7 +10,8 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   int cur1_adc=analogRead(pin);
-  float cur = (cur1_adc * -0.002246) + 6.499;
+  // Serial.println(cur1_adc);
+  float cur = (cur1_adc * -0.0010) + 3.507;
   cur1_avg += cur;
   cur1_count++;
   if(cur1_count == 10)
