@@ -47,14 +47,14 @@ unsigned long getTime() {
 }
 #define Channel_ID 2163205
 #define Channel_API_Key "3NFJ999UA29ABUYQ"
-// char* SSID="Galaxy S20 FE 5G C177";
-// char* pass="b1d9s4k7";
-char* SSID="motorola edge 30_2538";
-char* pass="cxh2cev2gi99cp7";
+char* SSID="Galaxy M53 5GC4C1";
+char* pass="kkqu3690";
+// char* SSID="motorola edge 30_2538";
+// char* pass="cxh2cev2gi99cp7";
 
 WiFiClient client;
-#define CSE_IP      "192.168.86.43"
-// #define CSE_IP      "192.168.43.184"
+// #define CSE_IP      "192.168.86.43"
+#define CSE_IP      "192.168.197.43"
 #define CSE_PORT    5089
 #define HTTPS     false
 #define OM2M_ORGIN    "admin:admin"
